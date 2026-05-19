@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Italie du Nord — Été 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@300;400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#18170f;--ink2:#4a4840;--ink3:#8a8478;--paper:#f5f0e8;--paper2:#ede8dc;--paper3:#e4ddd0;
+  --rule:rgba(24,23,15,.1);--rule2:rgba(24,23,15,.18);
+  --blue:#1d5c8a;--blue-l:rgba(29,92,138,.09);
+  --green:#3a6030;--green-l:rgba(58,96,48,.09);
+  --amber:#9a6010;--amber-l:rgba(154,96,16,.09);
+  --red:#a02818;--red-l:rgba(160,40,24,.09);
+  --purple:#5a3a7a;--purple-l:rgba(90,58,122,.09);
+  --teal:#1a6a6a;--teal-l:rgba(26,106,106,.09);
+  --gold:#8a6820;--gold-l:rgba(138,104,32,.09);
+  --lake:#2060a0;--mtn:#3a5e28;--beach:#9a5a18;--fixed:#a02818;
+  --mono:'IBM Plex Mono',monospace;
+  --serif:'Source Serif 4','Georgia',serif;
+  --display:'Playfair Display','Georgia',serif;
+}
+html{font-size:16px;background:var(--paper);color:var(--ink)}
+body{font-family:var(--serif);line-height:1.6;min-height:100vh}
+.page{max-width:1120px;margin:0 auto;padding:0 28px 80px}
+
+/* HERO */
+.hero{padding:56px 0 36px;border-bottom:1px solid var(--rule2);margin-bottom:0;display:grid;grid-template-columns:1fr auto;align-items:end;gap:32px}
+.hero-eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--ink3);text-transform:uppercase;margin-bottom:14px}
+.hero-title{font-family:var(--display);font-size:clamp(40px,5.5vw,70px);font-weight:400;line-height:1.0;letter-spacing:-.02em}
+.hero-title em{font-style:italic;color:var(--blue)}
+.hero-meta{font-family:var(--mono);font-size:10.5px;color:var(--ink3);text-align:right;line-height:2.1}
+.hero-meta strong{color:var(--ink2);font-weight:500}
+
+/* NAV */
+.nav{display:flex;gap:0;border-bottom:1px solid var(--rule2);margin-bottom:0;position:sticky;top:0;background:var(--paper);z-index:100}
+.nav-btn{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:13px 18px;background:none;border:none;border-bottom:2px solid transparent;color:var(--ink3);cursor:pointer;transition:color .18s,border-color .18s;margin-bottom:-1px;white-space:nowrap}
+.nav-btn:hover{color:var(--ink2)}
+.nav-btn.active{color:var(--ink);border-bottom-color:var(--ink);font-weight:500}
+
+/* PANELS */
+.panel{display:none;padding-top:36px}
+.panel.active{display:block}
+
+/* ── MAP PANEL ─────────────────────────────── */
+.map-info{font-family:var(--mono);font-size:10.5px;color:var(--blue);background:var(--blue-l);border-left:2px solid var(--blue);padding:10px 16px;border-radius:0 3px 3px 0;margin-bottom:14px;line-height:1.7}
+.map-warn{font-family:var(--mono);font-size:10.5px;color:var(--amber);background:var(--amber-l);border-left:2px solid var(--amber);padding:10px 16px;border-radius:0 3px 3px 0;margin-bottom:14px;line-height:1.7}
+.map-container{width:100%;border:1px solid var(--rule2);border-radius:6px;overflow:hidden;background:#e8eef4;position:relative}
+.map-container iframe{display:block;width:100%;height:580px;border:none}
+.map-fallback{display:none}
+.map-legend{display:flex;flex-wrap:wrap;gap:14px;padding:14px 0;font-family:var(--mono);font-size:10px;color:var(--ink2);border-top:1px solid var(--rule)}
+.leg{display:flex;align-items:center;gap:6px}
+.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.leg-line{width:24px;height:0;flex-shrink:0}
+
+/* Static SVG map */
+.svgmap{width:100%;display:block}
+
+/* ── TIMELINE / TABLE ───────────────────────── */
+.totals{display:flex;flex-wrap:wrap;gap:28px;padding:20px 0 24px;border-bottom:1px solid var(--rule)}
+.tot{display:flex;flex-direction:column}
+.tot-val{font-family:var(--display);font-size:32px;font-weight:400;letter-spacing:-.03em;line-height:1}
+.tot-lbl{font-family:var(--mono);font-size:9.5px;color:var(--ink3);letter-spacing:.1em;margin-top:4px}
+
+.table-wrap{overflow-x:auto;margin-top:8px}
+table.iti{width:100%;border-collapse:collapse;font-size:13.5px}
+table.iti thead th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:10px 12px;text-align:left;border-bottom:1px solid var(--rule2);font-weight:400;white-space:nowrap}
+table.iti tbody td{padding:13px 12px;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.55}
+table.iti tbody tr:last-child td{border-bottom:none}
+table.iti tbody tr:hover td{background:rgba(24,23,15,.025)}
+.row-depart td,.row-return td{background:var(--paper2)}
+.en{font-family:var(--mono);font-size:10px;color:var(--ink3)}
+.ename{font-family:var(--display);font-size:15px;font-weight:500}
+.esub{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-top:2px}
+.dc{font-family:var(--mono);font-size:10.5px;color:var(--ink2);white-space:nowrap}
+.nc{font-family:var(--mono);font-size:12px;font-weight:500;text-align:center}
+.kc{font-family:var(--mono);font-size:10.5px;color:var(--ink2);white-space:nowrap}
+.kwarn{color:var(--amber);font-size:9.5px;display:block;margin-top:3px}
+.rc{font-size:13px;color:var(--ink2);max-width:310px}
+.rc strong{color:var(--ink);font-weight:500}
+.badge{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:2px;border:1px solid;margin-bottom:3px;margin-right:3px}
+.b-f{color:var(--fixed);border-color:var(--fixed);background:var(--red-l)}
+.b-l{color:var(--lake);border-color:var(--lake);background:var(--blue-l)}
+.b-b{color:var(--beach);border-color:var(--beach);background:var(--amber-l)}
+.b-m{color:var(--mtn);border-color:var(--mtn);background:var(--green-l)}
+.b-c{color:var(--ink3);border-color:var(--rule2);background:rgba(24,23,15,.04)}
+.b-w{color:var(--amber);border-color:var(--amber);background:var(--amber-l)}
+.b-g{color:var(--gold);border-color:var(--gold);background:var(--gold-l)}
+
+/* ── DOLOMITES PANEL ─────────────────────────── */
+/* ── PLAGES PANEL ─────────────────────────────── */
+.spots-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-bottom:32px}
+.spot-card{border:1px solid var(--rule2);border-radius:5px;overflow:hidden;background:var(--paper)}
+.spot-head{padding:14px 16px;border-bottom:1px solid var(--rule)}
+.spot-tag{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.spot-name{font-family:var(--display);font-size:17px;font-weight:500}
+.spot-body{padding:14px 16px;font-size:13px;color:var(--ink2);line-height:1.7}
+.spot-dist{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-bottom:6px}
+
+/* planning table */
+.plan-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}
+.plan-table th{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:9px 11px;text-align:left;border-bottom:1px solid var(--rule2);font-weight:400}
+.plan-table td{padding:11px 11px;border-bottom:1px solid var(--rule);color:var(--ink2);vertical-align:top;line-height:1.55}
+.plan-table tr:last-child td{border-bottom:none}
+.plan-table tr:hover td{background:rgba(24,23,15,.02)}
+.pj{font-family:var(--mono);font-size:10px;color:var(--ink3)}
+.pd{font-family:var(--mono);font-size:10.5px;color:var(--ink2)}
+
+/* section headings */
+.sec-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink3);margin:32px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+
+/* ── GASTRO PANEL ─────────────────────────────── */
+.gastro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--rule2);border:1px solid var(--rule2);border-radius:5px;overflow:hidden;margin-bottom:28px}
+.gc{background:var(--paper);padding:18px}
+.gc h3{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--rule);font-weight:400}
+.gc ul{list-style:none;font-size:13px;color:var(--ink2)}
+.gc ul li{padding:4px 0;border-bottom:1px solid rgba(24,23,15,.04);display:flex;gap:7px;align-items:baseline;line-height:1.4}
+.gc ul li::before{content:'—';font-family:var(--mono);font-size:9.5px;color:var(--ink3);flex-shrink:0}
+.gc .resto{margin-top:10px;font-family:var(--mono);font-size:9.5px;color:var(--blue);letter-spacing:.04em;line-height:1.8}
+
+/* ── LOGEMENTS PANEL ─────────────────────────────── */
+.log-intro{font-family:var(--mono);font-size:10.5px;color:var(--amber);background:var(--amber-l);border-left:2px solid var(--amber);padding:12px 16px;margin-bottom:24px;line-height:1.7;border-radius:0 3px 3px 0}
+.log-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.lc{border:1px solid var(--rule2);border-radius:5px;overflow:hidden;background:var(--paper)}
+.lc.featured{border-color:var(--blue)}
+.lc-head{background:var(--paper2);padding:12px 16px;display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--rule)}
+.lc.featured .lc-head{background:var(--blue-l)}
+.lc-head h3{font-family:var(--display);font-size:14px;font-weight:500}
+.lc-dates{font-family:var(--mono);font-size:9.5px;color:var(--ink3)}
+.lc-body{padding:14px 16px;font-size:12.5px;color:var(--ink2)}
+.lc-zone{font-family:var(--mono);font-size:10px;color:var(--ink3);margin-bottom:5px}
+.lc-budget{font-family:var(--mono);font-size:10.5px;font-weight:500;color:var(--blue);margin-bottom:10px}
+.lc-note{margin-bottom:10px;line-height:1.6}
+.lc-body a{display:block;font-family:var(--mono);font-size:10px;color:var(--blue);text-decoration:none;padding:7px 12px;border:1px solid var(--blue);border-radius:2px;text-align:center;transition:background .15s,color .15s}
+.lc-body a:hover{background:var(--blue);color:#fff}
+
+/* RETOUR */
+.ret-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+@media(max-width:600px){.ret-grid{grid-template-columns:1fr}}
+.ret-card{border:1px solid var(--rule2);border-radius:5px;padding:18px;background:var(--paper);font-size:13px;color:var(--ink2);line-height:1.7}
+.ret-card h4{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);margin-bottom:10px}
+.ret-card.hi{border-color:var(--gold);background:var(--gold-l)}
+.ret-card.hi h4{color:var(--gold)}
+
+/* FOOTER */
+.footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--rule);font-family:var(--mono);font-size:9.5px;color:var(--ink3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+/* UTILS */
+.excluded{opacity:.55;border-style:dashed!important}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<header class="hero">
+  <div>
+    <div class="hero-eyebrow">Programme de vacances · Été 2025</div>
+    <h1 class="hero-title">Italie du <em>Nord</em><br>& Ligurie</h1>
+  </div>
+  <div class="hero-meta">
+    <strong>Départ</strong> Maisons-Alfort<br>
+    31 juillet — 31 août 2025<br>
+    <strong>29 nuits · 2 adultes · 1 enfant (4 ans)</strong><br>
+    Variante : Lac de Côme · Retour Genève
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav">
+  <button class="nav-btn active" onclick="show('carte')">Carte</button>
+  <button class="nav-btn" onclick="show('itineraire')">Itinéraire</button>
+  <button class="nav-btn" onclick="show('dolomites')">Dolomites</button>
+  <button class="nav-btn" onclick="show('plages')">Plages</button>
+  <button class="nav-btn" onclick="show('gastronomie')">Gastronomie</button>
+  <button class="nav-btn" onclick="show('logements')">Logements</button>
+</nav>
+
+<!-- ═══════════════════════════════════════════ CARTE -->
+<div id="panel-carte" class="panel active">
+
+  <div class="map-warn">⚠ Lucques → Dolomites : ~3h45 via A15/A22 — légèrement au-delà des 3h max. Départ matinal recommandé. Tous les autres trajets sont dans la règle.</div>
+  <div class="map-info">★ Retour via Val d'Aoste → Genève (1 nuit + 1 jour) → A40 → Paris. Réserver tunnel Mont-Blanc à l'avance sur tunnel-mb.com. Alternative sans réservation : Col du Petit-Saint-Bernard.</div>
+
+  <!-- SVG MAP styled as Google Maps -->
+  <div class="map-container">
+  <svg class="svgmap" viewBox="0 0 900 620" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M1 1L9 5L1 9" fill="none" stroke="context-stroke" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+      <!-- Road texture -->
+      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(180,185,200,.18)" stroke-width="0.5"/>
+      </pattern>
+      <filter id="blur2"><feGaussianBlur stdDeviation="2"/></filter>
+      <filter id="blur1"><feGaussianBlur stdDeviation="1"/></filter>
+    </defs>
+
+    <!-- Ocean -->
+    <rect width="900" height="620" fill="#aac8e8"/>
+    <!-- Grid overlay on water -->
+    <rect width="900" height="620" fill="url(#grid)" opacity="0.4"/>
+
+    <!-- France main -->
+    <polygon points="0,0 310,0 320,30 290,90 270,160 240,230 210,290 185,360 165,430 130,490 80,540 0,580" fill="#f0ece0"/>
+    <!-- France roads hint -->
+    <polygon points="0,0 310,0 320,30 290,90 270,160 240,230 210,290 185,360 165,430 130,490 80,540 0,580" fill="url(#grid)" opacity="0.5"/>
+
+    <!-- Switzerland -->
+    <polygon points="310,0 900,0 900,120 780,105 700,90 615,100 535,88 455,78 390,88 340,70 310,50" fill="#dfe8d0"/>
+    <!-- Austria -->
+    <polygon points="560,0 900,0 900,120 780,105 700,90 620,78 570,68" fill="#d8e2cc"/>
+
+    <!-- Italy main landmass -->
+    <polygon points="290,90 900,0 900,620 750,600 700,580 640,610 590,575 540,560 505,540 475,560 450,580 425,555 400,570 375,540 350,565 325,540 305,555 285,530 268,495 248,465 225,440 210,410 215,370 230,330 252,290 278,245 305,195 328,148 355,108 375,78 395,60 420,52 445,62 468,52 495,65 520,55 548,68 575,58 605,72 635,58 660,72 690,55 715,68 740,56 760,70 785,55 820,72 850,58 900,75" fill="#e8e0d4"/>
+    <!-- Italy roads grid -->
+    <polygon points="290,90 900,0 900,620 750,600 700,580 640,610 590,575 540,560 505,540 475,560 450,580 425,555 400,570 375,540 350,565 325,540 305,555 285,530 268,495 248,465 225,440 210,410 215,370 230,330 252,290 278,245 305,195 328,148 355,108 375,78 395,60 420,52 445,62 468,52 495,65 520,55 548,68 575,58 605,72 635,58 660,72 690,55 715,68 740,56 760,70 785,55 820,72 850,58 900,75" fill="url(#grid)" opacity="0.35"/>
+
+    <!-- Po Valley - greener -->
+    <ellipse cx="530" cy="260" rx="240" ry="95" fill="#d8e8c0" opacity="0.45"/>
+
+    <!-- Alps relief -->
+    <polygon points="290,90 340,70 390,88 450,78 510,70 570,68 620,78 680,68 730,80 780,65 840,78 900,65 900,0 310,0" fill="#c8d0bc" opacity="0.75"/>
+    <!-- Alps shading -->
+    <polygon points="290,90 340,70 390,88 450,78 510,70 570,68 620,78 680,68 730,80 780,65 840,78 900,65 900,0 310,0" fill="#b8c4b0" opacity="0.25"/>
+
+    <!-- Apennines -->
+    <polygon points="295,320 322,295 350,312 378,288 406,308 432,330 452,362 438,385 408,368 378,388 348,370 318,382 298,348" fill="#c0cab4" opacity="0.55"/>
+
+    <!-- Ligurian coast coloring -->
+    <path d="M 210,410 Q 250,425 290,420 Q 340,415 380,405 Q 420,395 458,402" fill="none" stroke="#88aacc" stroke-width="3" opacity="0.5"/>
+    <!-- Ligurian sea - lighter -->
+    <ellipse cx="310" cy="450" rx="140" ry="50" fill="#b8d4ea" opacity="0.6"/>
+
+    <!-- LAKES (detailed shapes) -->
+    <!-- Lake Como (Y-shape) -->
+    <path d="M 443,168 Q 448,185 446,202 Q 442,220 444,238 Q 440,228 435,215 Q 431,198 433,180 Q 437,168 443,168Z" fill="#5090c8" opacity="0.9"/>
+    <!-- Lake Maggiore -->
+    <path d="M 408,155 Q 412,172 410,190 Q 406,208 408,224 Q 404,214 400,200 Q 397,184 399,167 Q 403,154 408,155Z" fill="#5090c8" opacity="0.8"/>
+    <!-- Lake Garda -->
+    <ellipse cx="518" cy="218" rx="10" ry="28" fill="#5090c8" opacity="0.75"/>
+    <!-- Lake Iseo -->
+    <ellipse cx="475" cy="192" rx="5" ry="17" fill="#5090c8" opacity="0.7"/>
+    <!-- Lake Orta -->
+    <ellipse cx="395" cy="165" rx="4" ry="12" fill="#5090c8" opacity="0.65"/>
+    <!-- Lake Braies -->
+    <ellipse cx="645" cy="122" rx="5" ry="6" fill="#3080b8" opacity="0.95"/>
+    <!-- Carezza lake -->
+    <ellipse cx="618" cy="138" rx="4" ry="4" fill="#3080b8" opacity="0.85"/>
+    <!-- Misurina -->
+    <ellipse cx="668" cy="128" rx="4" ry="4" fill="#3080b8" opacity="0.8"/>
+
+    <!-- ROADS - major highways (light gray, labeled) -->
+    <!-- A6/A7 France-Italy axis -->
+    <path d="M 168,205 Q 155,280 152,348 Q 250,420 290,418" stroke="#b0a898" stroke-width="2.5" fill="none" opacity="0.6"/>
+    <!-- A15 Genova-Parma -->
+    <path d="M 295,418 Q 340,380 380,340 Q 420,295 445,250" stroke="#b0a898" stroke-width="2" fill="none" opacity="0.5"/>
+    <!-- A22 Brenner -->
+    <path d="M 530,88 Q 528,140 522,190 Q 520,215 518,240" stroke="#b0a898" stroke-width="2" fill="none" opacity="0.5"/>
+
+    <!-- ROUTE LINES -->
+    <!-- 0→1: Maisons-Alfort → Isle-sur-la-Sorgue -->
+    <path d="M 168,205 Q 152,280 150,350" stroke="#888" stroke-width="2" fill="none" stroke-dasharray="6,4" opacity="0.55" marker-end="url(#arr)"/>
+
+    <!-- 1→2: Isle → Levanto -->
+    <path d="M 152,355 Q 195,400 258,415" stroke="#555" stroke-width="2" fill="none" opacity="0.6" marker-end="url(#arr)"/>
+
+    <!-- 2→3: Levanto → Lucques (via Pise) -->
+    <path d="M 262,413 Q 302,418 340,412" stroke="#555" stroke-width="2" fill="none" opacity="0.6" marker-end="url(#arr)"/>
+
+    <!-- 3→4: Lucques → Dolomites -->
+    <path d="M 344,410 Q 430,335 580,180" stroke="#555" stroke-width="2" fill="none" opacity="0.6" marker-end="url(#arr)"/>
+
+    <!-- 4→5: Dolomites → Vérone -->
+    <path d="M 580,178 Q 558,200 540,238" stroke="#555" stroke-width="2" fill="none" opacity="0.6" marker-end="url(#arr)"/>
+
+    <!-- 5→6: Vérone → Lac de Garde -->
+    <path d="M 537,242 Q 528,228 520,222" stroke="#555" stroke-width="2" fill="none" opacity="0.6" marker-end="url(#arr)"/>
+
+    <!-- 6→7: Lac de Garde → Lac de Côme (BLUE - variante) -->
+    <path d="M 516,215 Q 490,210 448,205" stroke="#1d5c8a" stroke-width="2.5" fill="none" opacity="0.9" marker-end="url(#arr)"/>
+
+    <!-- 7→8: Lac de Côme → Sestri Levante -->
+    <path d="M 440,218 Q 390,300 305,405" stroke="#1d5c8a" stroke-width="2.5" fill="none" opacity="0.9" marker-end="url(#arr)"/>
+
+    <!-- 8→9: Sestri → Val d'Aoste -->
+    <path d="M 300,408 Q 350,345 400,285 Q 420,245 438,205" stroke="#8a6820" stroke-width="2.2" fill="none" stroke-dasharray="7,4" opacity="0.8" marker-end="url(#arr)"/>
+
+    <!-- 9→10: Val d'Aoste → Genève -->
+    <path d="M 432,198 Q 395,175 348,152 Q 305,135 258,138" stroke="#8a6820" stroke-width="2.2" fill="none" stroke-dasharray="7,4" opacity="0.8" marker-end="url(#arr)"/>
+
+    <!-- 10→0: Genève → Maisons-Alfort (return) -->
+    <path d="M 252,138 Q 210,160 168,208" stroke="#8a6820" stroke-width="2.2" fill="none" stroke-dasharray="7,4" opacity="0.8" marker-end="url(#arr)"/>
+
+    <!-- ─── STOP MARKERS (Google Maps style pins) ─── -->
+
+    <!-- Helper: pin shape = circle + pointed bottom -->
+    <!-- 0: Maisons-Alfort -->
+    <g transform="translate(168,205)">
+      <circle r="12" fill="#1a1a1a" stroke="white" stroke-width="2"/>
+      <circle r="4" fill="white"/>
+      <text y="-18" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9.5" font-weight="500" fill="#1a1a1a">Maisons-Alfort</text>
+      <text y="-8" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888">Départ 31/07</text>
+    </g>
+
+    <!-- 1: Isle-sur-la-Sorgue FIXED -->
+    <g transform="translate(150,355)">
+      <circle r="12" fill="#a02818" stroke="white" stroke-width="2.5"/>
+      <circle r="4" fill="white"/>
+      <text x="-14" y="-14" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="9.5" font-weight="500" fill="#a02818">Isle-sur-la-Sorgue</text>
+      <text x="-14" y="-4" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888">31/07–02/08 · 2n</text>
+    </g>
+
+    <!-- 2: Levanto / Cinque Terre -->
+    <g transform="translate(260,415)">
+      <circle r="11" fill="#0f6e8a" stroke="white" stroke-width="2"/>
+      <circle r="3.5" fill="white"/>
+      <text x="-14" y="-14" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="9.5" font-weight="500" fill="#0f6e8a">Levanto</text>
+      <text x="-14" y="-4" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888">02–05/08 · 3n</text>
+    </g>
+
+    <!-- Pise optional -->
+    <g transform="translate(313,422)">
+      <circle r="6" fill="white" stroke="#999" stroke-width="1.2" stroke-dasharray="2,2"/>
+      <text y="-12" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8.5" fill="#999">Pise (opt.)</text>
+    </g>
+
+    <!-- 3: Lucques -->
+    <g transform="translate(344,412)">
+      <circle r="11" fill="#3a5e28" stroke="white" stroke-width="2"/>
+      <circle r="3.5" fill="white"/>
+      <text x="14" y="-14" font-family="'IBM Plex Mono',monospace" font-size="9.5" font-weight="500" fill="#3a5e28">Lucques</text>
+      <text x="14" y="-4" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888">05–08/08 · 3n</text>
+    </g>
+
+    <!-- 4: Dolomites -->
+    <g transform="translate(582,175)">
+      <circle r="12" fill="#5a6e3a" stroke="white" stroke-width="2"/>
+      <circle r="4" fill="white"/>
+      <text x="16" y="-14" font-family="'IBM Plex Mono',monospace" font-size="9.5" font-weight="500" fill="#5a6e3a">Dolomites</text>
+      <text x="16" y="-4" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888">08–12/08 · 4n</text>
+      <!-- Small lake dots near -->
+      <text x="68" y="-22" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#3080b8">Braies·Misurina·Carezza</text>
+    </g>
+
+    <!-- 5: Vérone -->
+    <g transform="translate(538,243)">
+      <circle r="11" fill="#7a4020" stroke="white" stroke-width="2"/>
+      <circle r="3.5" fill="white"/>
+      <text x="14" y="-12" font-family="'IBM Plex Mono',monospace" font-size="9.5" font-weight="500" fill="#7a4020">Vérone</text>
+      <text x="14" y="-2" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888">12–14/08 · 2n</text>
+    </g>
+
+    <!-- 6: Lac de Garde -->
+    <g transform="translate(518,218)">
+      <circle r="11" fill="#2060a0" stroke="white" stroke-width="2"/>
+      <circle r="3.5" fill="white"/>
+      <text x="15" y="-12" font-family="'IBM Plex Mono',monospace" font-size="9.5" font-weight="500" fill="#2060a0">Lac de Garde</text>
+      <text x="15" y="-2" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888">14–16/08 · 2n ⚠Ferragosto</text>
+    </g>
+
+    <!-- 7: Lac de Côme IMPOSÉ -->
+    <g transform="translate(442,210)">
+      <circle r="14" fill="#1d5c8a" stroke="white" stroke-width="3"/>
+      <circle r="5" fill="white"/>
+      <text x="-18" y="-18" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="10" font-weight="500" fill="#1d5c8a">Lac de Côme ★</text>
+      <text x="-18" y="-7" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="8.5" fill="#888">16–23/08 · 7n imposées</text>
+    </g>
+
+    <!-- 8: Sestri Levante -->
+    <g transform="translate(300,408)">
+      <circle r="12" fill="#9a5a18" stroke="white" stroke-width="2.5"/>
+      <circle r="4" fill="white"/>
+      <text x="-16" y="-16" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="9.5" font-weight="500" fill="#9a5a18">Sestri Levante</text>
+      <text x="-16" y="-5" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888">23–29/08 · 6n</text>
+    </g>
+
+    <!-- 9: Val d'Aoste -->
+    <g transform="translate(432,200)">
+      <circle r="9" fill="#8a6820" stroke="white" stroke-width="2"/>
+      <circle r="3" fill="white"/>
+      <text x="-14" y="-14" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="9" font-weight="500" fill="#8a6820">Val d'Aoste</text>
+      <text x="-14" y="-4" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888">29/08 · transit</text>
+    </g>
+
+    <!-- 10: Genève -->
+    <g transform="translate(252,138)">
+      <circle r="11" fill="#8a6820" stroke="white" stroke-width="2"/>
+      <circle r="3.5" fill="white"/>
+      <text x="14" y="-12" font-family="'IBM Plex Mono',monospace" font-size="9.5" font-weight="500" fill="#8a6820">Genève</text>
+      <text x="14" y="-2" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#888">30–31/08 · 1n+1j</text>
+    </g>
+
+    <!-- Mont-Blanc label -->
+    <text x="350" y="168" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#6a6a6a" transform="rotate(-12,350,168)">Mont-Blanc · Tunnel</text>
+
+    <!-- Lake labels small -->
+    <text x="449" y="190" font-family="'IBM Plex Mono',monospace" font-size="7.5" fill="#2060a0" opacity="0.85">Côme</text>
+    <text x="412" y="176" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#2060a0" opacity="0.75">Majeur</text>
+    <text x="524" y="208" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#2060a0" opacity="0.75">Garde</text>
+    <text x="479" y="183" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#2060a0" opacity="0.65">Iseo</text>
+
+    <!-- Country labels -->
+    <text x="80" y="240" font-family="'IBM Plex Mono',monospace" font-size="13" font-weight="500" fill="#9a9888" opacity="0.55">FRANCE</text>
+    <text x="490" y="320" font-family="'IBM Plex Mono',monospace" font-size="14" font-weight="500" fill="#8a8070" opacity="0.45">ITALIE</text>
+    <text x="610" y="60" font-family="'IBM Plex Mono',monospace" font-size="10" fill="#7a8070" opacity="0.5">AUTRICHE</text>
+    <text x="330" y="52" font-family="'IBM Plex Mono',monospace" font-size="10" fill="#7a7a6a" opacity="0.5">SUISSE</text>
+    <text x="238" y="468" font-family="'IBM Plex Mono',monospace" font-size="10" fill="#4a7a9a" opacity="0.6">Mer Ligure</text>
+
+    <!-- LEGEND BOX -->
+    <rect x="10" y="530" width="878" height="80" rx="5" fill="rgba(245,240,232,.95)" stroke="rgba(24,23,15,.12)" stroke-width="0.5"/>
+    <!-- row 1 -->
+    <circle cx="28" cy="550" r="5" fill="#a02818" stroke="white" stroke-width="1"/>
+    <text x="38" y="554" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#4a4840">Étape imposée</text>
+    <circle cx="145" cy="550" r="5" fill="#1d5c8a" stroke="white" stroke-width="1"/>
+    <text x="155" y="554" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#4a4840">Lac de Côme (variante)</text>
+    <circle cx="300" cy="550" r="5" fill="#9a5a18" stroke="white" stroke-width="1"/>
+    <text x="310" y="554" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#4a4840">Séjour plages</text>
+    <circle cx="400" cy="550" r="5" fill="#5a6e3a" stroke="white" stroke-width="1"/>
+    <text x="410" y="554" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#4a4840">Dolomites</text>
+    <circle cx="480" cy="550" r="5" fill="#8a6820" stroke="white" stroke-width="1"/>
+    <text x="490" y="554" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#4a4840">Retour Val d'Aoste / Genève</text>
+    <!-- row 2 -->
+    <line x1="18" y1="572" x2="40" y2="572" stroke="#888" stroke-width="2" stroke-dasharray="5,3"/>
+    <text x="45" y="576" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#4a4840">Aller</text>
+    <line x1="85" y1="572" x2="107" y2="572" stroke="#1d5c8a" stroke-width="2.5"/>
+    <text x="112" y="576" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#4a4840">Via Lac de Côme</text>
+    <line x1="222" y1="572" x2="250" y2="572" stroke="#8a6820" stroke-width="2" stroke-dasharray="6,3"/>
+    <text x="255" y="576" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#4a4840">Retour Genève (Val d'Aoste)</text>
+    <circle cx="400" cy="572" r="5" fill="white" stroke="#999" stroke-width="1" stroke-dasharray="2,1.5"/>
+    <text x="410" y="576" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#888">Pise (optionnel — étape passage 5/08)</text>
+    <rect x="615" y="567" width="10" height="8" rx="1.5" fill="#5090c8" opacity="0.85"/>
+    <text x="629" y="576" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#4a4840">Lac</text>
+    <text x="665" y="576" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#4a4840">★ = 7 nuits imposées · ⚠Ferragosto = réserver en avance</text>
+  </svg>
+  </div>
+
+  <div class="map-legend">
+    <div class="leg"><div class="leg-dot" style="background:#a02818"></div> Étapes imposées</div>
+    <div class="leg"><div class="leg-dot" style="background:#1d5c8a"></div> Lac de Côme (★ 7 nuits)</div>
+    <div class="leg"><div class="leg-dot" style="background:#9a5a18"></div> Sestri Levante — plages</div>
+    <div class="leg"><div class="leg-dot" style="background:#5a6e3a"></div> Dolomites</div>
+    <div class="leg"><div class="leg-dot" style="background:#8a6820"></div> Retour Val d'Aoste + Genève</div>
+    <div class="leg"><div class="leg-dot" style="background:#fff;border:1px dashed #999"></div> Pise (optionnel)</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ ITINÉRAIRE -->
+<div id="panel-itineraire" class="panel">
+  <div class="totals">
+    <div class="tot"><span class="tot-val">29</span><span class="tot-lbl">nuits au total</span></div>
+    <div class="tot"><span class="tot-val">~3 600</span><span class="tot-lbl">km aller</span></div>
+    <div class="tot"><span class="tot-val">11</span><span class="tot-lbl">étapes</span></div>
+    <div class="tot"><span class="tot-val">31/07 → 31/08</span><span class="tot-lbl">période</span></div>
+  </div>
+  <div class="table-wrap">
+  <table class="iti">
+    <thead><tr>
+      <th>#</th><th>Étape</th><th>Dates</th><th>Nuits</th><th>Distance / Durée</th><th>Type</th><th>Pourquoi s'y arrêter</th>
+    </tr></thead>
+    <tbody>
+
+    <tr class="row-depart">
+      <td><span class="en">0</span></td>
+      <td><div class="ename">Maisons-Alfort</div><div class="esub">Île-de-France — départ</div></td>
+      <td class="dc">31/07, matin</td><td class="nc">—</td><td class="kc">—</td>
+      <td><span class="badge b-c">Départ</span></td>
+      <td class="rc">A6 → A7 → A8 → A51. Départ idéalement avant 7h pour traverser Paris et Lyon avant les bouchons du vendredi estival.</td>
+    </tr>
+
+    <tr>
+      <td><span class="en">1</span></td>
+      <td><div class="ename">Isle-sur-la-Sorgue</div><div class="esub">Provence · Vaucluse</div></td>
+      <td class="dc">31/07 → 02/08<br><small>2 nuits</small></td><td class="nc">2</td>
+      <td class="kc">~700 km<br>~6h30</td>
+      <td><span class="badge b-f">Imposé</span></td>
+      <td class="rc">Village des antiquaires sur la Sorgue turquoise. <strong>Fontaine-de-Vaucluse</strong> à 5 km. Marché du dimanche matin, Luberon. Cuisine provençale d'exception.</td>
+    </tr>
+
+    <tr>
+      <td><span class="en">2</span></td>
+      <td><div class="ename">Levanto — Cinque Terre</div><div class="esub">Ligurie · base CT</div></td>
+      <td class="dc">02/08 → 05/08<br><small>3 nuits</small></td><td class="nc">3</td>
+      <td class="kc">~340 km<br>~3h00</td>
+      <td><span class="badge b-b">Plage</span></td>
+      <td class="rc">Meilleure base pour les Cinque Terre (train direct, 8 min). Plage de sable en centre-ville. Pesto, anchois de Monterosso, focaccia. Criques sur sentiers côtiers.</td>
+    </tr>
+
+    <tr>
+      <td><span class="en">3</span></td>
+      <td><div class="ename">Lucques <span style="font-size:12px;color:var(--ink3)">(+ Pise)</span></div><div class="esub">Toscane nord</div></td>
+      <td class="dc">05/08 → 08/08<br><small>3 nuits</small></td><td class="nc">3</td>
+      <td class="kc">~80 km<br>~1h10<br><span class="kwarn">★ Pise le 05/08 : Levanto→Pise (1h15) puis Pise→Lucques (45 min). Faisable en étape de passage.</span></td>
+      <td><span class="badge b-c">Ville</span></td>
+      <td class="rc"><strong>Pise le 5/08</strong> : Campo dei Miracoli, 2h sur place, adapté aux enfants. Puis arrivée à Lucques. <strong>Lucques</strong> : remparts Renaissance (vélos !), tours-jardins, huile AOP. Carrare à 40 min (marbre).</td>
+    </tr>
+
+    <tr>
+      <td><span class="en">4</span></td>
+      <td><div class="ename">Dolomites — Val Pusteria</div><div class="esub">Braies · Carezza · Misurina · Odle</div></td>
+      <td class="dc">08/08 → 12/08<br><small>4 nuits</small></td><td class="nc">4</td>
+      <td class="kc">~420 km<br>~3h45<br><span class="kwarn">⚠ Légèrement &gt;3h — A15/A22. Départ matinal.</span></td>
+      <td><span class="badge b-m">Montagne</span></td>
+      <td class="rc">Lac de Braies, Carezza (eau émeraude + reflet Catinaccio), Misurina (Tre Cime), Odle/Geisler (alpages). Voir onglet Dolomites. Speck, knödel, strudel, vins Alto Adige.</td>
+    </tr>
+
+    <tr>
+      <td><span class="en">5</span></td>
+      <td><div class="ename">Vérone</div><div class="esub">Vénétie</div></td>
+      <td class="dc">12/08 → 14/08<br><small>2 nuits</small></td><td class="nc">2</td>
+      <td class="kc">~170 km<br>~2h00</td>
+      <td><span class="badge b-c">Ville</span></td>
+      <td class="rc">Arènes romaines (opéra en plein air en août). Piazza Bra, centro storico. <strong>Valpolicella</strong> à 15 min (caves Allegrini, Masi). Risotto all'Amarone, Amarone, Soave.</td>
+    </tr>
+
+    <tr>
+      <td><span class="en">6</span></td>
+      <td><div class="ename">Lac de Garde — Malcesine</div><div class="esub">Rive nord-est · Vénétie</div></td>
+      <td class="dc">14/08 → 16/08<br><small>2 nuits</small></td><td class="nc">2</td>
+      <td class="kc">~60 km<br>~50 min<br><span class="kwarn">⚠ 14–15 août = Ferragosto. Réserver maintenant.</span></td>
+      <td><span class="badge b-l">Lac</span></td>
+      <td class="rc">Plus grand lac d'Italie. <strong>Malcesine</strong> : château scaligère, téléphérique Monte Baldo (2 218 m, vue 360°). Eaux de baignade. Lugana bianco, Bardolino Chiaretto.</td>
+    </tr>
+
+    <tr>
+      <td><span class="en">7 ★</span></td>
+      <td><div class="ename">Lac de Côme — Varenna</div><div class="esub">Variante A · 7 nuits imposées</div></td>
+      <td class="dc">16/08 → 23/08<br><small>7 nuits</small></td><td class="nc">7</td>
+      <td class="kc">~100 km<br>~1h20</td>
+      <td><span class="badge b-f">Imposé</span> <span class="badge b-l">Lac</span></td>
+      <td class="rc"><strong>Varenna</strong> (recommandé) : village en escalier, ferry pour Bellagio (15 min) et Menaggio. <strong>Bellagio</strong> en day-trip : jardins Villa Melzi. Monte San Primo, kayak. Misultin, lavarello, bresaola della Valtellina.</td>
+    </tr>
+
+    <tr>
+      <td><span class="en">8</span></td>
+      <td><div class="ename">Sestri Levante</div><div class="esub">Riviera di Levante · plages</div></td>
+      <td class="dc">23/08 → 29/08<br><small>6 nuits</small></td><td class="nc">6</td>
+      <td class="kc">~120 km<br>~1h30</td>
+      <td><span class="badge b-b">Plage</span></td>
+      <td class="rc">Point de chute idéal : Baia del Silenzio à pied, San Fruttuoso en bateau (45 min), Tellaro en voiture (50 min), Portofino en bateau (35 min). Voir onglet Plages.</td>
+    </tr>
+
+    <tr>
+      <td><span class="en">9</span></td>
+      <td><div class="ename">Val d'Aoste</div><div class="esub">Transit / panoramique</div></td>
+      <td class="dc">29/08<br><small>transit</small></td><td class="nc">—</td>
+      <td class="kc">~300 km<br>~3h00<br><span class="kwarn">Sestri → Gênes → A26 → Aoste</span></td>
+      <td><span class="badge b-g">Retour</span></td>
+      <td class="rc">Traversée de la vallée de l'Aoste (SS26), vue sur Mont-Blanc et Grand Paradis. Pause déjeuner à Aoste (fromages valdôtains, lard d'Arnad). Tunnel Mont-Blanc : réserver sur tunnel-mb.com.</td>
+    </tr>
+
+    <tr>
+      <td><span class="en">10</span></td>
+      <td><div class="ename">Genève</div><div class="esub">Suisse · 1 nuit + 1 journée</div></td>
+      <td class="dc">29/08 → 31/08<br><small>1 nuit + 1j</small></td><td class="nc">1</td>
+      <td class="kc">~80 km<br>~1h00<br><span class="kwarn">Aoste → Tunnel MB → Chamonix → Genève</span></td>
+      <td><span class="badge b-g">Retour</span></td>
+      <td class="rc">Jet d'eau, vieille ville, musée d'Art et d'Histoire (gratuit). Déjeuner Rive droite ou Carouge. Chocolats Favarger. Départ 16h → A40 → A6 → Paris, arrivée ~22h.</td>
+    </tr>
+
+    <tr class="row-return">
+      <td><span class="en">→</span></td>
+      <td><div class="ename">Maisons-Alfort</div><div class="esub">Retour</div></td>
+      <td class="dc">31/08, soir</td><td class="nc">—</td>
+      <td class="kc">~560 km<br>~5h30</td>
+      <td><span class="badge b-c">Arrivée</span></td>
+      <td class="rc">A40 (Genève) → Bourg-en-Bresse → A6 → A86 → Maisons-Alfort. Arrivée estimée 21h–22h.</td>
+    </tr>
+
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ DOLOMITES -->
+<div id="panel-dolomites" class="panel">
+
+  <div class="map-info">4 nuits (08–12 août) depuis une base en Val Pusteria — Dobbiaco ou Villabassa. Chaque site à moins d'1h de route depuis la base. Programme suggéré : 1 site par jour + 1 jour libre/rando facile.</div>
+
+  <div class="sec-label">Les quatre sites</div>
+  <div class="spots-grid">
+
+    <div class="spot-card">
+      <div class="spot-head" style="background:rgba(48,128,184,.1)">
+        <div class="spot-tag" style="color:#2060a0">Lac alpin · Iconique · 1496 m</div>
+        <div class="spot-name">Lac de Braies</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:4px">Pragser Wildsee · 30 min depuis Dobbiaco</div>
+      </div>
+      <div class="spot-body">
+        Le lac alpin le plus photographié d'Italie. Eaux d'un turquoise profond encaissées entre les parois verticales de la Croda del Becco. <strong>Arriver avant 8h</strong> impérativement en août — parking saturé dès 9h (navettes depuis Braies village). Tour du lac à pied : 3,5 km, 1h, entièrement plat, idéal avec un enfant de 4 ans. Barques à louer. Hôtel historique Pragser Wildsee en fond de lac.
+        <div style="margin-top:10px;font-family:var(--mono);font-size:9.5px;color:var(--ink3)">Demi-journée suffisante · Départ 7h recommandé</div>
+      </div>
+    </div>
+
+    <div class="spot-card">
+      <div class="spot-head" style="background:rgba(48,128,60,.1)">
+        <div class="spot-tag" style="color:#2a6030">Lac de montagne · Couleur émeraude · 1519 m</div>
+        <div class="spot-name">Lac de Carezza</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:4px">Karersee · 50 min depuis Dobbiaco</div>
+      </div>
+      <div class="spot-body">
+        Petit lac aux eaux vert émeraude intensément colorées par les minéraux, avec le massif du Catinaccio (Rosengarten) en miroir. Moins fréquenté que Braies le matin. Tour du lac : 1,5 km, 30 min, facile avec enfant. <strong>En chemin</strong> : col de Costalunga (Karerpass) — panorama spectaculaire. Possibilité de combiner avec une route des vins en redescendant vers Bolzano.
+        <div style="margin-top:10px;font-family:var(--mono);font-size:9.5px;color:var(--ink3)">Demi-journée · Combine bien avec Odle (même axe)</div>
+      </div>
+    </div>
+
+    <div class="spot-card">
+      <div class="spot-head" style="background:rgba(80,80,180,.1)">
+        <div class="spot-tag" style="color:#3a3a8a">Lac alpin · Tre Cime · 1754 m</div>
+        <div class="spot-name">Lac de Misurina</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:4px">Lago di Misurina · 40 min depuis Dobbiaco</div>
+      </div>
+      <div class="spot-body">
+        Le plus grand lac naturel des Dolomites orientales, dominé par le groupe des Tre Cime di Lavaredo — une des silhouettes les plus reconnaissables des Alpes. Depuis Misurina, route à péage (ou navette) vers le rifugio Auronzo : panorama direct sur les Tre Cime (accessible poussette). <strong>Tour du lac</strong> : 3 km, 45 min, plat et ombragé. Baignade possible (eau froide). 
+        <div style="margin-top:10px;font-family:var(--mono);font-size:9.5px;color:var(--ink3)">Journée complète si Tre Cime inclus · Prévoir pique-nique</div>
+      </div>
+    </div>
+
+    <div class="spot-card">
+      <div class="spot-head" style="background:rgba(90,120,48,.1)">
+        <div class="spot-tag" style="color:#3a6028">Alpages · Vallée · Randonnée</div>
+        <div class="spot-name">Le Odle — Val di Funes</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:4px">Geisler / Odle · 55 min depuis Dobbiaco</div>
+      </div>
+      <div class="spot-body">
+        La carte postale par excellence des Dolomites : chapelle de San Giovanni in Ranui au milieu d'un alpage vert, les aiguilles verticales des Odle (3 025 m) en arrière-plan. Depuis le parking de Santa Maddalena : chemin plat jusqu'à la chapelle (30 min aller). Pour les plus courageux : montée aux rifugi Adolf Munkel Weg (2h, panorama sur toutes les Odle). <strong>Idéal avec enfant</strong> jusqu'à la chapelle.
+        <div style="margin-top:10px;font-family:var(--mono);font-size:9.5px;color:var(--ink3)">Demi-journée facile · Photo iconique garantie</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sec-label">Programme suggéré (4 nuits — base Dobbiaco)</div>
+  <table class="plan-table">
+    <thead><tr><th>Jour</th><th>Date</th><th>Programme</th><th>Notes pratiques</th></tr></thead>
+    <tbody>
+      <tr><td class="pj">J1</td><td class="pd">08/08 ven.</td><td><strong>Arrivée + installation.</strong> Après-midi libre à Dobbiaco. Balade autour du lac de Dobbiaco (3 km, plat). Dîner local : knödel et speck.</td><td style="font-family:var(--mono);font-size:9.5px;color:var(--ink3)">Départ de Lucques tôt matin (~5h–6h) pour arriver en milieu d'après-midi.</td></tr>
+      <tr><td class="pj">J2</td><td class="pd">09/08 sam.</td><td><strong>Lac de Braies.</strong> Départ 7h depuis Dobbiaco. Tour du lac (1h). Barque (30 min). Retour 11h avant l'affluence. Après-midi : repos ou marché de Dobbiaco.</td><td style="font-family:var(--mono);font-size:9.5px;color:var(--ink3)">⚠ Arrivée avant 8h obligatoire. Samedi = très fréquenté.</td></tr>
+      <tr><td class="pj">J3</td><td class="pd">10/08 dim.</td><td><strong>Misurina + Tre Cime.</strong> Départ 8h. Tour du lac de Misurina (45 min). Route à péage vers Rifugio Auronzo (ou navette) : panorama Tre Cime. Pique-nique sur place. Retour 16h.</td><td style="font-family:var(--mono);font-size:9.5px;color:var(--ink3)">Prévoir laine/coupe-vent pour l'enfant (2 000 m). Navette depuis Misurina en août.</td></tr>
+      <tr><td class="pj">J4</td><td class="pd">11/08 lun.</td><td><strong>Odle (Val di Funes).</strong> Départ 9h. Santa Maddalena → chapelle San Giovanni in Ranui (30 min aller). Photos. Option : sentier Munkel Weg si motivation. Retour 14h. <strong>Carezza</strong> en route : 30 min de détour.</td><td style="font-family:var(--mono);font-size:9.5px;color:var(--ink3)">Carezza + Odle = journée bien remplie. Choisir selon l'énergie.</td></tr>
+      <tr><td class="pj">J5</td><td class="pd">12/08 mar.</td><td><strong>Départ vers Vérone.</strong> Matinée libre (marché local, souvenirs). Départ ~10h vers Vérone via A22. Arrivée ~12h. Déjeuner à Vérone.</td><td style="font-family:var(--mono);font-size:9.5px;color:var(--ink3)">~170 km, 2h. Arrivée confortable pour l'après-midi à Vérone.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sec-label" style="margin-top:28px">Base recommandée — Dobbiaco / Villabassa</div>
+  <p style="font-size:13.5px;color:var(--ink2);max-width:640px;line-height:1.8">Dobbiaco (Toblach) est le nœud logistique parfait du Val Pusteria : à 30 min de Braies, 40 min de Misurina, 50 min de Carezza et 55 min des Odle. Village authentique avec commerces, supermarchés, restaurants tyroliens. Villabassa (5 km au sud) est plus petite et plus calme. Éviter San Candido (plus touristique) et Cortina d'Ampezzo (trop cher et trop loin des 4 sites).</p>
+</div>
+
+<!-- ═══════════════════════════════════════════ PLAGES -->
+<div id="panel-plages" class="panel">
+
+  <div class="map-warn">⚠ Baratti, Monte Argentario, Cala Violina, Cala del Gesso (Maremme toscane) : situées à 3h30–4h au sud de Sestri Levante. Non réalisables en day-trip. Ces plages nécessiteraient un itinéraire centré sur la Toscane côtière — incompatible avec ce programme.</div>
+
+  <div class="map-info">Point de chute : <strong>Sestri Levante</strong> — Baia del Silenzio à 5 min à pied, San Fruttuoso à 45 min de bateau, Tellaro à 50 min de voiture, Portofino à 35 min de bateau. La péninsule boisée sépare les deux baies (Silenzio / Favole).</div>
+
+  <div class="sec-label">Les plages du séjour</div>
+  <div class="spots-grid">
+
+    <div class="spot-card">
+      <div class="spot-head" style="background:rgba(154,90,24,.1)">
+        <div class="spot-tag" style="color:#9a5a18">5 min à pied · Sable · Enfants ✓</div>
+        <div class="spot-name">Baia del Silenzio</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:4px">Sestri Levante · accessible depuis l'appartement</div>
+      </div>
+      <div class="spot-body">
+        Croissant de sable fin et clair protégé par la péninsule boisée. Eaux turquoise calmes en fond de baie, idéales pour un enfant. Maisons pastel en demi-cercle. Très fréquentée en journée — <strong>arriver avant 9h</strong> ou après 17h. Pas de marée. Pas de courant. La plus adaptée de toutes pour un enfant de 4 ans. Gelateria à 2 min.
+        <div style="margin-top:10px;font-family:var(--mono);font-size:9.5px;color:var(--ink3)">Incontournable · Tous les matins libres</div>
+      </div>
+    </div>
+
+    <div class="spot-card">
+      <div class="spot-head" style="background:rgba(29,92,138,.1)">
+        <div class="spot-tag" style="color:#1d5c8a">45 min bateau · Galets · Abbaye XII e · Sauvage</div>
+        <div class="spot-name">San Fruttuoso</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:4px">Bateau Tigullio depuis Sestri · ou sentier 1h15 depuis Portofino</div>
+      </div>
+      <div class="spot-body">
+        Abbaye bénédictine du XII<sup>e</sup> posée dans une crique accessible <strong>uniquement en bateau ou à pied</strong>. Galets, eaux d'une limpidité exceptionnelle. Cristo degli Abissi — statue sous-marine à 15 m (snorkeling). Aucune route : aucune voiture. Véritable lieu hors du temps. Restaurant dans l'abbaye (réserver). Expérience magique avec un enfant curieux. Retour bateau au choix.
+        <div style="margin-top:10px;font-family:var(--mono);font-size:9.5px;color:var(--ink3)">Journée entière · Prendre le bateau 9h · Retour 16h</div>
+      </div>
+    </div>
+
+    <div class="spot-card">
+      <div class="spot-head" style="background:rgba(58,96,48,.1)">
+        <div class="spot-tag" style="color:#3a6030">50 min voiture · Borgo medievale · Golfo dei Poeti</div>
+        <div class="spot-name">Tellaro</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:4px">Via SS331 · Lerici en chemin (5 km avant)</div>
+      </div>
+      <div class="spot-body">
+        Un des plus beaux villages d'Italie (classé "Borghi più belli d'Italia"). Maisons médiévales en aplomb sur des rochers en mer. Criques de galets descendues par des escaliers entre les maisons. Très peu de commerces — venir préparés (pique-nique). Combiner avec <strong>Lerici</strong> (château angevin, baignade, déjeuner) à 5 km. Le Golfo dei Poeti (Byron, Shelley) offre un des panoramas les plus romantiques de Ligurie.
+        <div style="margin-top:10px;font-family:var(--mono);font-size:9.5px;color:var(--ink3)">Journée complète aller-retour · Pique-nique recommandé</div>
+      </div>
+    </div>
+
+    <div class="spot-card">
+      <div class="spot-head" style="background:rgba(90,58,122,.1)">
+        <div class="spot-tag" style="color:#5a3a7a">35 min bateau · Eau cristalline · Paraggi</div>
+        <div class="spot-name">Portofino + Paraggi</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--ink3);margin-top:4px">Bateau depuis Sestri ou Rapallo · Descente à pied vers Paraggi</div>
+      </div>
+      <div class="spot-body">
+        Portofino en bateau pour éviter la route saturée. 1h dans le village, photos du port. Descendre à pied vers <strong>Paraggi</strong> (20 min de sentier) : eau vert émeraude sur fond de sable blanc, l'une des plus belles baies de Ligurie. <strong>Cala dell'Oro</strong> accessible aussi (30 min supplémentaires). Déjeuner à Paraggi ou retour à Portofino. Retour en bateau depuis Portofino.
+        <div style="margin-top:10px;font-family:var(--mono);font-size:9.5px;color:var(--ink3)">Journée · Bateau 10h · Retour libre 16h ou 18h</div>
+      </div>
+    </div>
+
+    <div class="spot-card excluded">
+      <div class="spot-head" style="background:rgba(24,23,15,.04)">
+        <div class="spot-tag" style="color:#8a8478">3h30–4h aller · Hors périmètre ✗</div>
+        <div class="spot-name" style="color:var(--ink3)">Baratti · Cala Violina · Monte Argentario · Cala del Gesso</div>
+      </div>
+      <div class="spot-body" style="color:var(--ink3)">
+        Plages magnifiques de Maremme et Toscane sud. Trop loin de Sestri Levante pour un day-trip (3h30–4h aller simple). Non pertinentes depuis ce point de chute. À envisager uniquement si l'itinéraire intègre une étape en Toscane côtière — ce qui supposerait de retravailler le programme entre Lucques et les Dolomites.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sec-label">Programme suggéré (6 nuits)</div>
+  <table class="plan-table">
+    <thead><tr><th>Jour</th><th>Date</th><th>Programme</th></tr></thead>
+    <tbody>
+      <tr><td class="pj">J1</td><td class="pd">23/08 sam.</td><td>Arrivée depuis Lac de Côme. Installation. Apéritif sur la <strong>Baia delle Favole</strong> (côté nord). Dîner : trofie al pesto, Vermentino.</td></tr>
+      <tr><td class="pj">J2</td><td class="pd">24/08 dim.</td><td><strong>Baia del Silenzio</strong> — départ 8h30, avant l'afflux. Matinée baignade avec l'enfant. Après-midi : péninsule boisée (promenade). Apéritif en terrasse. Dimanche = moins de touristes que samedi.</td></tr>
+      <tr><td class="pj">J3</td><td class="pd">25/08 lun.</td><td><strong>San Fruttuoso</strong> — bateau 9h depuis Sestri (Tigullio). Arrivée 9h45. Baignade, abbaye, déjeuner sur place. Retour bateau 15h30. Journée mémorable.</td></tr>
+      <tr><td class="pj">J4</td><td class="pd">26/08 mar.</td><td><strong>Tellaro + Lerici</strong> — départ voiture 9h. Lerici (château, baignade, déjeuner au bord de l'eau). Tellaro après-midi (criques, flânerie). Retour 18h.</td></tr>
+      <tr><td class="pj">J5</td><td class="pd">27/08 mer.</td><td><strong>Portofino + Paraggi</strong> — bateau 10h. Portofino 1h. Descente à pied vers Paraggi, baignade, déjeuner. Retour bateau 16h ou 18h. Marché de Rapallo tôt le matin (facultatif).</td></tr>
+      <tr><td class="pj">J6</td><td class="pd">28/08 jeu.</td><td>Journée libre à Sestri. <strong>Baia del Silenzio</strong> tôt. Flânerie, glaces, shopping marché. Dîner de clôture : cima alla genovese + cappon magro + Pigato blanc.</td></tr>
+      <tr><td class="pj">→</td><td class="pd">29/08 ven.</td><td>Départ vers le Val d'Aoste (Sestri → Gênes → A26 → Aoste). ~3h. Pause déjeuner à Aoste. Tunnel Mont-Blanc → Chamonix → Genève (~2h). Arrivée Genève fin d'après-midi.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════════════════ GASTRONOMIE -->
+<div id="panel-gastronomie" class="panel">
+  <div class="sec-label">Par étape — spécialités, vins, adresses</div>
+  <div class="gastro-grid">
+
+    <div class="gc"><h3>Isle-sur-la-Sorgue · Provence</h3>
+      <ul>
+        <li>Tapenade noire et anchoyade maison</li>
+        <li>Fromages de chèvre du Luberon</li>
+        <li>Pieds et paquets à la marseillaise</li>
+        <li>Miel de lavande AOC · Nougat de Sault</li>
+        <li>Vins : Luberon blanc, Ventoux rouge</li>
+      </ul>
+      <div class="resto">★ Le Carré d'Herbes (terrasse, gastronomique)<br>★ Marché du dim., cours Fernande Peyre</div>
+    </div>
+
+    <div class="gc"><h3>Levanto · Cinque Terre</h3>
+      <ul>
+        <li>Trofie al pesto genovese (basilic DOP)</li>
+        <li>Anchois marinés de Monterosso IGP</li>
+        <li>Focaccia di Recco (au fromage frais)</li>
+        <li>Fritto misto di paranza</li>
+        <li>Sciachetrà (vin de paille, rare)</li>
+      </ul>
+      <div class="resto">★ La Cantina dello Zio Bramante, Levanto<br>★ Osteria Marinara, Monterosso (déj.)</div>
+    </div>
+
+    <div class="gc"><h3>Pise · passage</h3>
+      <ul>
+        <li>Cecina (galette de pois chiches au four)</li>
+        <li>Torta coi bischeri (tarte riz + chocolat)</li>
+        <li>Gelato artigianale — nombreuses enseignes</li>
+        <li>Vins : Bianco pisano di San Torpè</li>
+      </ul>
+      <div class="resto">★ Osteria dei Cavalieri (centro, midi)</div>
+    </div>
+
+    <div class="gc"><h3>Lucques · Toscane nord</h3>
+      <ul>
+        <li>Huile d'olive AOP Lucca (achat direct)</li>
+        <li>Farro della Garfagnana (épeautre local)</li>
+        <li>Lardo di Colonnata (de Carrare)</li>
+        <li>Buccellato (brioche à l'anis et raisins)</li>
+        <li>Vins : Montecarlo bianco, Colline Lucchesi</li>
+      </ul>
+      <div class="resto">★ Trattoria da Leo (intemporelle, accessible)<br>★ Buca di Sant'Antonio (gastronomique)</div>
+    </div>
+
+    <div class="gc"><h3>Dolomites · Tyrol</h3>
+      <ul>
+        <li>Speck Alto Adige IGP (jambon fumé à froid)</li>
+        <li>Knödel (quenelles de pain au speck)</li>
+        <li>Schlutzkrapfen (raviolis seigle+épinards)</li>
+        <li>Strudel aux pommes maison · Kaiserschmarrn</li>
+        <li>Vins : Lagrein, Gewürztraminer, Kerner</li>
+      </ul>
+      <div class="resto">★ Gasthof Durnwald, San Vigilio di Marebbe<br>★ Cantina Terlano — visite + dégustation</div>
+    </div>
+
+    <div class="gc"><h3>Vérone · Valpolicella</h3>
+      <ul>
+        <li>Risotto all'Amarone (LE plat signature)</li>
+        <li>Pastissada de caval (daube de cheval)</li>
+        <li>Bigoli in salsa (anchois et oignons)</li>
+        <li>Pandoro (brioche de Vérone, toute l'année)</li>
+        <li>Vins : Amarone, Valpolicella Ripasso, Soave</li>
+      </ul>
+      <div class="resto">★ Osteria al Duca (cour médiévale)<br>★ Allegrini ou Masi : visite cave + dégustation</div>
+    </div>
+
+    <div class="gc"><h3>Lac de Garde · Malcesine</h3>
+      <ul>
+        <li>Carpaccio di persico (perche du lac)</li>
+        <li>Bigoli al ragù d'anatra (canard)</li>
+        <li>Huile d'olive del Garda DOP</li>
+        <li>Limoncello artisanal de Gargnano</li>
+        <li>Vins : Lugana bianco, Bardolino Chiaretto</li>
+      </ul>
+      <div class="resto">★ Ristorante Vecchia Malcesine (vue lac)</div>
+    </div>
+
+    <div class="gc"><h3>Lac de Côme · Varenna</h3>
+      <ul>
+        <li>Risotto al pesce persico (perche)</li>
+        <li>Misultin (agone séché, produit rarissime)</li>
+        <li>Lavarello al burro e salvia</li>
+        <li>Polenta uncia (Scimudin fondu)</li>
+        <li>Bresaola della Valtellina IGP + Sforzato</li>
+      </ul>
+      <div class="resto">★ Il Cavatappi, Varenna (bord du lac)<br>★ Osteria del Perlo, Varenna (local)</div>
+    </div>
+
+    <div class="gc"><h3>Sestri Levante · Ligurie</h3>
+      <ul>
+        <li>Cima alla genovese (veau farci braisé)</li>
+        <li>Cappon magro (salade poissons et légumes)</li>
+        <li>Farinata (galette pois chiches au feu de bois)</li>
+        <li>Trofie + trenette al pesto frais</li>
+        <li>Vins : Vermentino, Pigato, Cinque Terre DOC</li>
+      </ul>
+      <div class="resto">★ La Cucina di Nonna Nina, S. Rocco di Camogli<br>★ Il Ciliegio, Sestri (terrasse, fruits de mer)</div>
+    </div>
+
+    <div class="gc"><h3>Val d'Aoste · pause</h3>
+      <ul>
+        <li>Fontina DOP (fondue valdôtaine)</li>
+        <li>Lard d'Arnad DOP (lard aux herbes alpines)</li>
+        <li>Carbonade (bœuf à la bière et épices)</li>
+        <li>Mocetta (viande de chamois séchée)</li>
+        <li>Vins : Enfer d'Arvier, Blanc de Morgex</li>
+      </ul>
+      <div class="resto">★ Trattoria degli Artisti, Aoste (centre-ville)</div>
+    </div>
+
+    <div class="gc"><h3>Genève · soirée</h3>
+      <ul>
+        <li>Fondue ou raclette (même en été)</li>
+        <li>Longeole (saucisse aux graines de fenouil)</li>
+        <li>Chocolats Favarger ou Aeschi (artisanaux)</li>
+        <li>Vins : Chasselas Dézaley (Vaud)</li>
+      </ul>
+      <div class="resto">★ Café du Soleil, Plainpalais (fondue genevoise)<br>★ Marché de Rive (fruits, vins, fromages)</div>
+    </div>
+
+    <div class="gc"><h3>Conseils transversaux</h3>
+      <ul>
+        <li>Déjeuner &gt; dîner : qualité/prix supérieur</li>
+        <li>Osterie sans photos au menu = fiable</li>
+        <li>Aperitivo 18–20h : pratique avec enfant</li>
+        <li>Enfant : pasta al pomodoro, pizza margherita</li>
+        <li>Italiens adorent les enfants — aucun refus</li>
+        <li>Gelato artigianale : partout et excellent</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ LOGEMENTS -->
+<div id="panel-logements" class="panel">
+
+  <div class="log-intro">
+    ⚠ Liens pré-filtrés Booking.com — appartements et maisons entières, 2 adultes + 1 enfant (4 ans). Budget élargi à 100–200 €/nuit. Réserver par ordre de priorité : <strong>1. Lac de Côme</strong> · <strong>2. Dolomites</strong> · <strong>3. Sestri Levante</strong> · <strong>4. Lac de Garde (Ferragosto !)</strong>. Les autres étapes sont plus souples.
+  </div>
+
+  <div class="log-grid">
+
+    <div class="lc">
+      <div class="lc-head"><h3>Isle-sur-la-Sorgue</h3><span class="lc-dates">31/07 → 02/08 · 2 nuits</span></div>
+      <div class="lc-body">
+        <div class="lc-zone">Zone : village · Fontaine-de-Vaucluse · campagne Luberon</div>
+        <div class="lc-budget">100–180 € / nuit · Mas ou gîte avec jardin</div>
+        <div class="lc-note">Nombreux mas provençaux avec patio et piscine dans le budget. Privilégier bords de Sorgue pour l'atmosphère.</div>
+        <a href="https://www.booking.com/searchresults.html?dest_id=-1449554&dest_type=city&checkin=2025-07-31&checkout=2025-08-02&group_adults=2&group_children=1&age=4&no_rooms=1&nflt=ht_id%3D220%3Bht_id%3D213%3Bht_id%3D216" target="_blank">Rechercher sur Booking.com →</a>
+      </div>
+    </div>
+
+    <div class="lc">
+      <div class="lc-head"><h3>Levanto — Cinque Terre</h3><span class="lc-dates">02/08 → 05/08 · 3 nuits</span></div>
+      <div class="lc-body">
+        <div class="lc-zone">Zone : centre Levanto · lungomare · ou La Spezia</div>
+        <div class="lc-budget">110–180 € / nuit · Appartement vue mer en option</div>
+        <div class="lc-note">Levanto plus calme et moins cher que les villages des CT. Éviter Riomaggiore et Manarola pour dormir — bruyant en août.</div>
+        <a href="https://www.booking.com/searchresults.html?dest_id=-121570&dest_type=city&checkin=2025-08-02&checkout=2025-08-05&group_adults=2&group_children=1&age=4&no_rooms=1&nflt=ht_id%3D220%3Bht_id%3D213" target="_blank">Rechercher sur Booking.com →</a>
+      </div>
+    </div>
+
+    <div class="lc">
+      <div class="lc-head"><h3>Lucques</h3><span class="lc-dates">05/08 → 08/08 · 3 nuits</span></div>
+      <div class="lc-body">
+        <div class="lc-zone">Zone : intra-muros · campagne Lucchesia</div>
+        <div class="lc-budget">100–170 € / nuit · Appartement dans les remparts</div>
+        <div class="lc-note">Les appartements dans les palais intra-muros sont charmants. Parking hors les murs (gratuit plusieurs zones). Campagne = piscine possible dans le budget.</div>
+        <a href="https://www.booking.com/searchresults.html?dest_id=-124616&dest_type=city&checkin=2025-08-05&checkout=2025-08-08&group_adults=2&group_children=1&age=4&no_rooms=1&nflt=ht_id%3D220%3Bht_id%3D213" target="_blank">Rechercher sur Booking.com →</a>
+      </div>
+    </div>
+
+    <div class="lc featured">
+      <div class="lc-head"><h3>Dolomites — Dobbiaco / Villabassa ★</h3><span class="lc-dates">08/08 → 12/08 · 4 nuits</span></div>
+      <div class="lc-body">
+        <div class="lc-zone">Zone : Val Pusteria · proche Lac de Braies</div>
+        <div class="lc-budget">110–180 € / nuit · Chalet avec terrasse montagne</div>
+        <div class="lc-note">Dobbiaco ou Villabassa. Chalets familiaux avec balcon vue montagne souvent dans le budget élargi. Réserver maintenant — très demandé en août.</div>
+        <a href="https://www.booking.com/searchresults.html?dest_id=-117843&dest_type=city&checkin=2025-08-08&checkout=2025-08-12&group_adults=2&group_children=1&age=4&no_rooms=1&nflt=ht_id%3D220%3Bht_id%3D213" target="_blank">Rechercher sur Booking.com →</a>
+      </div>
+    </div>
+
+    <div class="lc">
+      <div class="lc-head"><h3>Vérone</h3><span class="lc-dates">12/08 → 14/08 · 2 nuits</span></div>
+      <div class="lc-body">
+        <div class="lc-zone">Zone : centro storico · Valpolicella (mas dans les vignes)</div>
+        <div class="lc-budget">100–180 € / nuit · Centre ou campagne vignes</div>
+        <div class="lc-note">Option Valpolicella (15 km de Vérone) : appartements dans les vignes, piscine, très agréable. Plus calme que le centre en août.</div>
+        <a href="https://www.booking.com/searchresults.html?dest_id=-133051&dest_type=city&checkin=2025-08-12&checkout=2025-08-14&group_adults=2&group_children=1&age=4&no_rooms=1&nflt=ht_id%3D220%3Bht_id%3D213" target="_blank">Rechercher sur Booking.com →</a>
+      </div>
+    </div>
+
+    <div class="lc featured">
+      <div class="lc-head"><h3>Lac de Garde — Malcesine ★</h3><span class="lc-dates">14/08 → 16/08 · 2 nuits</span></div>
+      <div class="lc-body">
+        <div class="lc-zone">Zone : Malcesine · Brenzone · Torri del Benaco</div>
+        <div class="lc-budget">120–200 € / nuit · ⚠ Ferragosto = tarif majoré</div>
+        <div class="lc-note">Le 14–15 août est la nuit la plus chargée de l'année en Italie. Réserver immédiatement. Brenzone (30 km sud) = alternative plus calme et moins chère.</div>
+        <a href="https://www.booking.com/searchresults.html?dest_id=-112860&dest_type=city&checkin=2025-08-14&checkout=2025-08-16&group_adults=2&group_children=1&age=4&no_rooms=1&nflt=ht_id%3D220%3Bht_id%3D213" target="_blank">Rechercher sur Booking.com →</a>
+      </div>
+    </div>
+
+    <div class="lc featured">
+      <div class="lc-head"><h3>Lac de Côme — Varenna ★★</h3><span class="lc-dates">16/08 → 23/08 · 7 nuits</span></div>
+      <div class="lc-body">
+        <div class="lc-zone">Zone : Varenna (recommandé) · Menaggio · Colico</div>
+        <div class="lc-budget">120–200 € / nuit · PRIORITÉ ABSOLUE</div>
+        <div class="lc-note">7 nuits consécutives à ce tarif en août = rare. Varenna est moins saturée que Bellagio-ville. Menaggio = bonne alternative. Réserver immédiatement — c'est l'étape la plus difficile à trouver.</div>
+        <a href="https://www.booking.com/searchresults.html?dest_id=-118982&dest_type=city&checkin=2025-08-16&checkout=2025-08-23&group_adults=2&group_children=1&age=4&no_rooms=1&nflt=ht_id%3D220%3Bht_id%3D213" target="_blank">Rechercher sur Booking.com →</a>
+      </div>
+    </div>
+
+    <div class="lc featured">
+      <div class="lc-head"><h3>Sestri Levante ★</h3><span class="lc-dates">23/08 → 29/08 · 6 nuits</span></div>
+      <div class="lc-body">
+        <div class="lc-zone">Zone : péninsule · Baia del Silenzio · Riva Trigoso</div>
+        <div class="lc-budget">120–200 € / nuit · Vue mer si possible</div>
+        <div class="lc-note">Péninsule entre les deux baies = accès à pied à la Baia del Silenzio. Riva Trigoso (2 km au nord) = plus calme, moins cher. Week-end 23–24 août = retour Ferragosto italiens, forte demande.</div>
+        <a href="https://www.booking.com/searchresults.html?dest_id=-126270&dest_type=city&checkin=2025-08-23&checkout=2025-08-29&group_adults=2&group_children=1&age=4&no_rooms=1&nflt=ht_id%3D220%3Bht_id%3D213" target="_blank">Rechercher sur Booking.com →</a>
+      </div>
+    </div>
+
+    <div class="lc">
+      <div class="lc-head"><h3>Genève</h3><span class="lc-dates">29/08 → 30/08 · 1 nuit</span></div>
+      <div class="lc-body">
+        <div class="lc-zone">Zone : centre-ville · Carouge · Eaux-Vives</div>
+        <div class="lc-budget">130–200 € / nuit (tarifs suisses)</div>
+        <div class="lc-note">Genève est plus chère qu'en Italie. Carouge (tram 12, quartier bohème) = meilleur rapport qualité/prix. Pour 1 nuit, confort > charme. Booking fonctionne bien.</div>
+        <a href="https://www.booking.com/searchresults.html?dest_id=-1609611&dest_type=city&checkin=2025-08-30&checkout=2025-08-31&group_adults=2&group_children=1&age=4&no_rooms=1&nflt=ht_id%3D220%3Bht_id%3D213" target="_blank">Rechercher sur Booking.com →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sec-label" style="margin-top:28px">Options retour depuis Genève (31/08)</div>
+  <div class="ret-grid">
+    <div class="ret-card hi">
+      <h4>Retour recommandé — A40 → A6 → Paris</h4>
+      Départ Genève 15h–16h. A40 → Mâcon → A6 → A86 → Maisons-Alfort. Arrivée 21h–22h. Trajet fluide en fin de week-end (dimanche). Option pause déjeuner à <strong>Bourg-en-Bresse</strong> (volaille AOP) en route. Environ 560 km, 5h30.
+    </div>
+    <div class="ret-card">
+      <h4>Tunnels — réserver à l'avance</h4>
+      Tunnel du <strong>Mont-Blanc</strong> (Courmayeur → Chamonix) : obligatoirement prépayé sur <strong>tunnel-mb.com</strong> en août. Réserver dès maintenant. Alternative sans réservation : <strong>Col du Petit-Saint-Bernard</strong> (ouvert en août, gratuit, 1h de plus, panorama splendide) ou Grand-Saint-Bernard côté suisse.
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span>Italie du Nord · Été 2025 · Variante Lac de Côme · Retour Genève</span>
+  <span>31 juillet — 31 août · 29 nuits · 2 adultes + 1 enfant (4 ans)</span>
+  <span>Vérifier disponibilités Booking.com en temps réel · tunnel-mb.com pour le Mont-Blanc</span>
+</footer>
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+</script>
+</body>
+</html>
